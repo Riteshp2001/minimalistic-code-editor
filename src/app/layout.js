@@ -6,26 +6,44 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
 	title: "Minimalistic Front-End Code Editor",
 	description: "A powerful and user-friendly code editor for front-end development.",
-	author: "Your Name",
+	author: "Ritesh Dhirendra Pandit",
 	keywords: ["code editor", "front-end development", "web development", "code", "editor"],
 	version: "1.0.0",
-	repository: "https://github.com/yourusername/your-repo",
+	repository: "https://github.com/Riteshp2001/minimilistic-code-editor.git",
 	license: "MIT License",
-	homepage: "https://yourwebsite.com",
+	homepage: "https://minimilistic-code-editor.vercel.app/",
 	social: {
-		twitter: "@yourtwitter",
-		linkedin: "https://www.linkedin.com/in/yourlinkedin",
-		github: "https://github.com/yourgithub",
+		portfolio: "https://riteshpandit.vercel.app/",
+		linkedin: "https://www.linkedin.com/in/ritesh-kumar-43b349200",
+		github: "https://github.com/Riteshp2001",
 	},
-	contributors: ["Contributor 1", "Contributor 2"],
 	supportEmail: "riteshpandit2001@gmail.com",
-	technologiesUsed: ["React", "Next.js", "CodeMirror", "CSS", "JavaScript"],
+	technologiesUsed: [
+		"React",
+		"Next.js",
+		"CodeMirror",
+		"CSS",
+		"JavaScript",
+		"Tailwind CSS",
+		"PostCSS",
+		"Prettier",
+		"ESLint",
+		"Babel",
+		"Webpack",
+		"Jest",
+		"React Testing Library",
+		"GitHub Actions",
+		"Vercel",
+	],
 	features: ["Syntax highlighting", "Autocompletion", "Themes support", "Version control integration"],
 };
 
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
+			<head>
+				<link rel="shortcut icon" href="/code-editor.png" type="image/x-icon" />
+			</head>
 			<body className={inter.className}>{children}</body>
 		</html>
 	);
