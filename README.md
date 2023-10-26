@@ -17,7 +17,7 @@ A clean, lightweight, and distraction-free code editor designed for efficient co
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/minimalistic-code-editor.git
+    git clone https://github.com/Riteshp2001/minimilistic-code-editor.git
     ```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
