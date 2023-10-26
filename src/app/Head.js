@@ -5,7 +5,7 @@ export default function Head() {
 		<>
 			<div className="h-4 w-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
 			<a
-				href="https://github.com/manuarora700/react-code-editor"
+				href="https://github.com/Riteshp2001/minimilistic-code-editor.git"
 				title="Fork me on GitHub"
 				className="githublink-corner"
 				target="_blank"
