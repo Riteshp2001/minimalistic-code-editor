@@ -1,6 +1,6 @@
 import { loader } from "@monaco-editor/react";
 
-const MAX_GUTTER_SIZE = 7;
+const MAX_GUTTER_SIZE = 8;
 
 const monacoThemes = {
 	active4d: "Active4D",
