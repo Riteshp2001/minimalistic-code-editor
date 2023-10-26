@@ -9,9 +9,9 @@ export const metadata = {
 	author: "Ritesh Dhirendra Pandit",
 	keywords: ["code editor", "front-end development", "web development", "code", "editor"],
 	version: "1.0.0",
-	repository: "https://github.com/Riteshp2001/minimilistic-code-editor.git",
+	repository: "https://github.com/Riteshp2001/minimalistic-code-editor.git",
 	license: "MIT License",
-	homepage: "https://minimilistic-code-editor.vercel.app/",
+	homepage: "https://minimalistic-code-editor.vercel.app/",
 	social: {
 		portfolio: "https://riteshpandit.vercel.app/",
 		linkedin: "https://www.linkedin.com/in/ritesh-kumar-43b349200",

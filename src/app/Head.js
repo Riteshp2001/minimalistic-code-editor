@@ -28,7 +28,7 @@ export default function Head() {
 			</a>
 
 			<h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center mb-6 text-blue-700 p-5">
-				Minimilistic Front-End Editor
+				Minimalistic Front-End Editor
 			</h1>
 			<hr />
 		</>
