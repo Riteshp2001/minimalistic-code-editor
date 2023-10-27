@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,9 +43,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<head>
-				<link rel="shortcut icon" href="/code-editor.png" type="image/x-icon" />
-			</head>
+			<Head>
+				<Link rel="shortcut icon" href="/code-editor.png" sizes="128x128" type="image/x-icon" />
+			</Head>
 			<body className={inter.className}>{children}</body>
 		</html>
 	);

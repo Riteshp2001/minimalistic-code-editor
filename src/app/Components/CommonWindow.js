@@ -46,6 +46,8 @@ export default function CommonWindow() {
 		<FileContext.Provider value={{ html, css, js, setHtml, setCss, setJs }}>
 			<ThemeSelector theme={theme} setTheme={setTheme} />
 			<Split
+				gutterSize={MAX_GUTTER_SIZE}
+				dragInterval={1}
 				sizes={[60, 75]}
 				minSize={320}
 				direction="horizontal"

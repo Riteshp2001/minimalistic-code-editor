@@ -41,7 +41,7 @@ export default function OutputWindow() {
     <iframe
       ref={iframeRef}
       title="Output"
-      className="sidebar bg-slate-50 text-black rounded-tl-lg rounded-bl-lg"
+      className="sidebar bg-slate-50 text-black rounded-md"
       allowFullScreen={true}
     ></iframe>
   );

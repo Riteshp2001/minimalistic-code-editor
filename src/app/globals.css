@@ -18,6 +18,16 @@
   }
 }
 
+@font-face {
+  font-family: 'NerdFont';
+  src: url('/MononokiNerdFont-Regular.ttf') format('woff');
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: local('Helvetica'), url('/helvetica.woff') format('woff');
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom,
@@ -25,7 +35,7 @@ body {
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   min-height: 100vh;
   width: 100%;
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 
@@ -57,10 +67,10 @@ body {
   background: white;
 }
 
-hr{
+hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, transparent,transparent, #fff,transparent, transparent);
+  background-image: linear-gradient(to right, transparent, transparent, #fff, transparent, transparent);
   margin-bottom: 30px;
 }
 
@@ -110,7 +120,7 @@ hr{
 }
 
 .gutter.gutter-vertical:hover {
-  background-image: linear-gradient(to right, transparent, #57ABFF, rgb(3, 108, 219), rgb(3, 108, 219), rgb(59, 130, 246), rgb(3, 108, 219),rgb(3, 108, 219), #57ABFF, transparent);
+  background-image: linear-gradient(to right, transparent, #57ABFF, rgb(3, 108, 219), rgb(3, 108, 219), rgb(59, 130, 246), rgb(3, 108, 219), rgb(3, 108, 219), #57ABFF, transparent);
   outline: #57ABFF;
 }
 

@@ -48,7 +48,7 @@ const ThemeSelector = ({ theme, setTheme }) => {
 				>
 					<optgroup label="Themes">
 						{Object.keys(monacoThemes).map((themeName, index) => (
-							<option key={index} value={themeName} className=" hover:bg-gray-100 font-semibold" >
+							<option key={index} value={themeName} className=" hover:bg-gray-100 font-semibold">
 								{themeName}
 							</option>
 						))}
@@ -57,7 +57,7 @@ const ThemeSelector = ({ theme, setTheme }) => {
 			</span>
 			<span>
 				<label htmlFor="exportFile" className=" font-thin italic p-2">
-					Want to Export ?
+					Want to Export files ?
 				</label>
 				<button
 					name="exportFile"
