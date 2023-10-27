@@ -8,7 +8,7 @@ const EditorWindow = ({ language, value, theme, handleEditorChange }) => {
 			width={`100%`}
 			language={language}
 			value={value}
-			theme={"Cobalt"||theme}
+			theme={theme}
 			defaultValue="// some comment"
 			onChange={handleEditorChange}
 			options={{
