@@ -18,6 +18,12 @@
   }
 }
 
+
+@font-face {
+  font-family: 'Wotfard-regular';
+  src: local('wotfard-regular-webfont'), url('/wotfard-regular-webfont.woff2') format('woff2');
+}
+
 @font-face {
   font-family: 'NerdFont';
   src: url('/MononokiNerdFont-Regular.ttf') format('woff');
@@ -36,7 +42,11 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
 }
+
 
 
 .githublink-corner {

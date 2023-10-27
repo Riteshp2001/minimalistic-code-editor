@@ -26,11 +26,11 @@ const EditorWindow = ({ language, value, theme, handleEditorChange }) => {
 					horizontal: "auto", // Show horizontal scrollbar when needed
 				},
 				contextmenu: true, // Enable the context menu
-        lineNumbers: "on", // Show line numbers on the left
-				fontFamily: "NerdFont, Helvetica, Arial, 'Monospace'", // Set the font family to a supported monospace font
+				lineNumbers: "on", // Show line numbers on the left
+				fontFamily: "Wotfard-regular,NerdFont, Helvetica, Arial, 'Monospace'", // Set the font family to a supported monospace font
 				fontSize: 15, // Set the font size
-        wordWrap: "on", // Enable word wrapping
-        roundedSelection: true, // Round the corners of a selection
+				wordWrap: "on", // Enable word wrapping
+				roundedSelection: true, // Round the corners of a selection
 				automaticLayout: true, // Automatically resize the editor based on content
 				readOnly: false, // Set the editor to read-only mode
 				dragAndDrop: true, // Allow dragging and dropping of text
@@ -40,7 +40,7 @@ const EditorWindow = ({ language, value, theme, handleEditorChange }) => {
 				lineDecorationsWidth: 16, // Set the width of line decorations (e.g., code lenses)
 				renderWhitespace: "boundary", // Show whitespace characters only at boundaries
 				renderControlCharacters: true, // Show control characters
-        fontLigatures: true, // Enable ligatures
+				fontLigatures: true, // Enable ligatures
 				autoClosingOvertype: "always",
 				autoClosingDelete: "always",
 				autoClosingBrackets: "always",
