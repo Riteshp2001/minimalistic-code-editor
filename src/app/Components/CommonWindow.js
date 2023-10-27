@@ -49,6 +49,7 @@ export default function CommonWindow() {
 				gutterSize={MAX_GUTTER_SIZE}
 				dragInterval={1}
 				sizes={[60, 75]}
+				minSize={320}
 				direction="horizontal"
 				className="mainAreaWrapper"
 			>
