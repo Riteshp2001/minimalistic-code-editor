@@ -48,7 +48,7 @@ export default function CommonWindow({ fileNames, setFileNames }) {
 }
 
 function FilesViewer({ fileNames, setFileNames }) {
-	const { setHtml, setCss, setJs, html } = useContext(FileContext);
+	const { setHtml, setCss, setJs } = useContext(FileContext);
 
 	function setSelectedFile(fileId) {
 		const selectedFile = fileNames.find((file) => file.id === fileId);
@@ -63,7 +63,6 @@ function FilesViewer({ fileNames, setFileNames }) {
 			setHtml(selectedFile.content.html);
 			setCss(selectedFile.content.css);
 			setJs(selectedFile.content.js);
-			console.log(html);
 		}
 	}
 
