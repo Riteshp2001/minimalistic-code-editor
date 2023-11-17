@@ -8,11 +8,11 @@ import { FileContext } from "./CommonWindow";
 export default function SplittingWindow() {
 	return (
 		<>
-			<div class="flex justify-between items-center bg-gray-700 text-black p-2 rounded-t-lg">
-				<div class="flex items-center">
-					<div class="h-3 w-3 bg-red-500 rounded-full mr-2"></div>
-					<div class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></div>
-					<div class="h-3 w-3 bg-green-500 rounded-full mr-2"></div>
+			<div className="flex justify-between items-center bg-gray-700 text-black p-2 rounded-t-lg">
+				<div className="flex items-center">
+					<div className="h-3 w-3 bg-red-500 rounded-full mr-2"></div>
+					<div className="h-3 w-3 bg-yellow-500 rounded-full mr-2"></div>
+					<div className="h-3 w-3 bg-green-500 rounded-full mr-2"></div>
 				</div>
 			</div>
 
