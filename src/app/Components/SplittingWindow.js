@@ -2,8 +2,6 @@ import Split from "react-split";
 import TypingEditorWindow from "./TypingEditorWindow";
 import OutputWindow from "./OutputWindow";
 import { MAX_GUTTER_SIZE } from "./MonacoThemes";
-import { useState, useEffect, useContext } from "react";
-import { FileContext } from "./CommonWindow";
 
 export default function SplittingWindow() {
 	return (

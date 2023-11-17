@@ -27,7 +27,7 @@ export default function CommonWindow({ fileNames, setFileNames }) {
 		if (savedJs) {
 			setJs(() => savedJs);
 		}
-	}, []);
+	}, [theme]);
 
 	useEffect(() => {
 		window.localStorage.setItem("html", html);
