@@ -63,13 +63,13 @@ export default function OutputWindow() {
 				onClick={toggleFullscreen}
 			>
 				<Tooltip
-          content="Full Screen"
-          placement="left"
+					content="Full Screen"
+					placement="left"
 					animate={{
 						mount: { scale: 1, y: 0 },
 						unmount: { scale: 0, y: 25 },
-          }}
-          className="z-2 bg-black rounded-lg p-2"
+					}}
+					className="z-2 bg-black rounded-lg p-2"
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
 						<path

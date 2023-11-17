@@ -73,7 +73,7 @@ function FilesViewer({ fileNames, setFileNames }) {
 	}
 
 	return (
-		<div className="relative  overflow-x-auto w-[95%] mx-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-white mb-4">
+		<div className="relative  overflow-x-auto w-[95%] mx-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-gray-700 scrollbar-thumb-rounded-lg scrollbar-track-rounded-lg mb-4">
 			<div className="flex p-3 mb-3 flex-row-reverse justify-end">
 				{fileNames.map((file) => (
 					<span
