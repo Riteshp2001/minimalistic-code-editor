@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Editor from "@monaco-editor/react";
+import { FileContext } from "./CommonWindow";
 
-const EditorWindow = ({ language, value, theme, handleEditorChange }) => {
+const EditorWindow = ({ language, value, handleEditorChange }) => {
+	const { theme } = useContext(FileContext);
 	return (
 		<Editor
 			height={`100vh`}
@@ -35,12 +37,18 @@ const EditorWindow = ({ language, value, theme, handleEditorChange }) => {
 				readOnly: false, // Set the editor to read-only mode
 				dragAndDrop: true, // Allow dragging and dropping of text
 				cursorBlinking: "expand", // Set the cursor blinking style
+				cursorSmoothCaretAnimation: "on", // Enable smooth caret animation
 				smoothScrolling: true, // Enable smooth scrolling
 				overviewRulerBorder: false, // Hide the border of the overview ruler
 				lineDecorationsWidth: 16, // Set the width of line decorations (e.g., code lenses)
 				renderWhitespace: "boundary", // Show whitespace characters only at boundaries
 				renderControlCharacters: true, // Show control characters
 				fontLigatures: true, // Enable ligatures
+				formatOnType: true, // Enable formatting on type
+				formatOnPaste: true, // Enable formatting on paste
+				links: true, // Enable links
+				hover: true, // Enable hover
+				autoClosingComments: "always",
 				autoClosingOvertype: "always",
 				autoClosingDelete: "always",
 				autoClosingBrackets: "always",

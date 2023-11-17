@@ -1,64 +1,37 @@
-import React, { useContext } from "react";
-import monacoThemes from "./MonacoThemes";
-import { defineTheme } from "./MonacoThemes";
+import React, { useContext, useMemo } from "react";
+import monacoThemes, { defineTheme } from "./MonacoThemes";
 import { FileContext } from "./CommonWindow";
 import JSZip from "jszip";
+import AddFile from "./AddFile";
+import { Tooltip } from "@material-tailwind/react";
 
-const ThemeSelector = ({ theme, setTheme }) => {
-	const { html, css, js } = useContext(FileContext);
+const ThemeSelector = ({ fileNames, setFileNames }) => {
+	const { html, css, js, theme, setTheme } = useContext(FileContext);
 
-	const handleThemeChange = (themeName) => {
-		console.log("theme...", themeName);
+	const handleExportButton = useMemo(() => {
+		const handleExport = () => {
+			const zip = new JSZip();
 
-		if (["light", "vs-dark"].includes(themeName)) {
-			setTheme(themeName);
-		} else {
-			defineTheme(themeName).then((_) => setTheme(themeName));
-		}
-	};
+			zip.file("index.html", html);
+			zip.file("styles.css", css);
+			zip.file("script.js", js);
 
-	const handleExport = () => {
-		const zip = new JSZip();
+			zip.generateAsync({ type: "blob" }).then(function (blob) {
+				const a = document.createElement("a");
+				a.href = URL.createObjectURL(blob);
+				a.download = "minimilistic_code.zip";
+				a.click();
+			});
+		};
 
-		zip.file("index.html", html);
-		zip.file("styles.css", css);
-		zip.file("script.js", js);
-
-		zip.generateAsync({ type: "blob" }).then(function (blob) {
-			const a = document.createElement("a");
-			a.href = URL.createObjectURL(blob);
-			a.download = "minimilistic_code.zip";
-			a.click();
-		});
-	};
-
-	return (
-		<div className="flex align-text-bottom py-2 justify-between">
-			<span className=" flex">
-				<label htmlFor="themes" className="underline text-xl font-medium text-gray-900 dark:text-white p-1">
-					Select Theme :{" "}
-				</label>
-				<select
-					title="Theme"
-					name="themes"
-					value={theme}
-					onChange={(e) => handleThemeChange(e.target.value)}
-					placeholder={`Select Theme`}
-					className="bg-gray-50 border border-gray-300 font-semibold text-gray-900 text-sm rounded-lg focus:ring-blue-500 outline-none focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-				>
-					<optgroup label="Themes">
-						{Object.keys(monacoThemes).map((themeName, index) => (
-							<option key={index} value={themeName} className=" hover:bg-gray-100 font-semibold">
-								{themeName}
-							</option>
-						))}
-					</optgroup>
-				</select>
-			</span>
-			<span>
-				<label htmlFor="exportFile" className=" font-thin italic p-2">
-					Want to Export files ?
-				</label>
+		return (
+			<Tooltip
+				content="Export as ZIP"
+				animate={{
+					mount: { scale: 1, y: 0 },
+					unmount: { scale: 0, y: 25 },
+				}}
+			>
 				<button
 					name="exportFile"
 					onClick={handleExport}
@@ -67,6 +40,54 @@ const ThemeSelector = ({ theme, setTheme }) => {
 				>
 					Export
 				</button>
+			</Tooltip>
+		);
+	}, [html, css, js]);
+
+	const selectTheme = useMemo(() => {
+		const handleThemeChange = (themeName) => {
+			console.log("theme...", themeName);
+
+			if (["light", "vs-dark"].includes(themeName)) {
+				setTheme(themeName);
+			} else {
+				defineTheme(themeName).then((_) => setTheme(themeName));
+			}
+		};
+		return (
+			<select
+				title="Theme"
+				name="themes"
+				value={theme}
+				onChange={(e) => handleThemeChange(e.target.value)}
+				placeholder={`Select Theme`}
+				className="bg-gray-50 border border-gray-300 font-semibold text-gray-900 text-sm rounded-lg focus:ring-blue-500 outline-none focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+			>
+				<optgroup label="Themes">
+					{Object.keys(monacoThemes).map((themeName, index) => (
+						<option key={index} value={themeName} className=" hover:bg-gray-100 font-semibold">
+							{themeName}
+						</option>
+					))}
+				</optgroup>
+			</select>
+		);
+	}, [setTheme, theme]);
+
+	return (
+		<div className="flex align-text-bottom py-2 justify-between">
+			<span className=" flex">
+				<label htmlFor="themes" className="underline text-xl font-medium text-gray-900 dark:text-white p-1">
+					Select Theme :{" "}
+				</label>
+				{selectTheme}
+			</span>
+			<AddFile fileNames={fileNames} setFileNames={setFileNames} />
+			<span>
+				<label htmlFor="exportFile" className=" font-thin italic p-2">
+					Want to Export files ?
+				</label>
+				{handleExportButton}
 			</span>
 		</div>
 	);

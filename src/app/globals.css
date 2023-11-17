@@ -18,27 +18,30 @@
   }
 }
 
-
 @font-face {
-  font-family: 'Wotfard-regular';
-  src: local('wotfard-regular-webfont'), url('/wotfard-regular-webfont.woff2') format('woff2');
+  font-family: "Wotfard-regular";
+  src: local("wotfard-regular-webfont"),
+    url("/wotfard-regular-webfont.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'NerdFont';
-  src: url('/MononokiNerdFont-Regular.ttf') format('woff');
+  font-family: "NerdFont";
+  src: url("/MononokiNerdFont-Regular.ttf") format("woff");
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: local('Helvetica'), url('/helvetica.woff') format('woff');
+  font-family: "Helvetica";
+  src: local("Helvetica"), url("/helvetica.woff") format("woff");
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+      to bottom,
       transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
@@ -46,8 +49,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   touch-action: manipulation;
 }
-
-
 
 .githublink-corner {
   position: absolute;
@@ -80,8 +81,15 @@ body {
 hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, transparent, transparent, #fff, transparent, transparent);
-  margin-bottom: 30px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    transparent,
+    #fff,
+    transparent,
+    transparent
+  );
+  /* margin-bottom: 30px; */
 }
 
 .gutter {
@@ -105,8 +113,17 @@ hr {
 }
 
 .gutter:hover {
-  background-image: linear-gradient(to bottom, transparent, #57ABFF, rgb(3, 108, 219), rgb(59, 130, 246), rgb(3, 108, 219), #57ABFF, transparent);
-  outline: #57ABFF;
+  background-image: linear-gradient(
+    to bottom,
+    transparent,
+    #57abff,
+    rgb(3, 108, 219),
+    rgb(59, 130, 246),
+    rgb(3, 108, 219),
+    #57abff,
+    transparent
+  );
+  outline: #57abff;
 }
 
 .gutter:hover::after {
@@ -126,50 +143,29 @@ hr {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(90deg);
-
 }
 
 .gutter.gutter-vertical:hover {
-  background-image: linear-gradient(to right, transparent, #57ABFF, rgb(3, 108, 219), rgb(3, 108, 219), rgb(59, 130, 246), rgb(3, 108, 219), rgb(3, 108, 219), #57ABFF, transparent);
-  outline: #57ABFF;
-}
-
-.bottomArea {
-  overflow: auto;
-  transition: height 0.25s ease-out;
-  -webkit-transition: height 0.25s ease-out;
-  -moz-transition: height 0.25s ease-out;
-  -ms-transition: height 0.25s ease-out;
-  -o-transition: height 0.25s ease-out;
-}
-
-.mainAreaWrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  transition: height 0.25s ease-out;
-  -webkit-transition: height 0.25s ease-out;
-  -moz-transition: height 0.25s ease-out;
-  -ms-transition: height 0.25s ease-out;
-  -o-transition: height 0.25s ease-out;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    #57abff,
+    rgb(3, 108, 219),
+    rgb(3, 108, 219),
+    rgb(59, 130, 246),
+    rgb(3, 108, 219),
+    rgb(3, 108, 219),
+    #57abff,
+    transparent
+  );
+  outline: #57abff;
 }
 
 .sidebar {
   height: inherit;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
   transition: width 0.25s ease-out;
   -webkit-transition: width 0.25s ease-out;
   -moz-transition: width 0.25s ease-out;
   -ms-transition: width 0.25s ease-out;
   -o-transition: width 0.25s ease-out;
-}
-
-.wrapper {
-  height: 90vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
 }
