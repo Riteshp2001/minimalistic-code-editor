@@ -33,22 +33,21 @@ export default function CommonWindow({ fileNames, setFileNames }) {
 		window.localStorage.setItem("html", html);
 		window.localStorage.setItem("css", css);
 		window.localStorage.setItem("js", js);
-		window.localStorage.setItem("files", fileNames);
-	}, [html, css, js, fileNames]);
+	}, [html, css, js]);
 
 	return (
 		<div className="p-2 rounded-lg shadow-lg w-full">
 			<FileContext.Provider value={{ html, css, js, theme, setHtml, setCss, setJs, setTheme }}>
 				<FilesViewer fileNames={fileNames} setFileNames={setFileNames} />
 				<ThemeSelector fileNames={fileNames} setFileNames={setFileNames} />
-				<SplittingWindow/>
+				<SplittingWindow />
 			</FileContext.Provider>
 		</div>
 	);
 }
 
 function FilesViewer({ fileNames, setFileNames }) {
-	const { setHtml, setCss, setJs, html } = useContext(FileContext);
+	const { setHtml, setCss, setJs } = useContext(FileContext);
 
 	function setSelectedFile(fileId) {
 		const selectedFile = fileNames.find((file) => file.id === fileId);
@@ -63,7 +62,6 @@ function FilesViewer({ fileNames, setFileNames }) {
 			setHtml(selectedFile.content.html);
 			setCss(selectedFile.content.css);
 			setJs(selectedFile.content.js);
-			console.log(html);
 		}
 	}
 
@@ -110,14 +108,12 @@ function FilesViewer({ fileNames, setFileNames }) {
 								>
 									<path
 										d="M20 14V7C20 5.34315 18.6569 4 17 4H12M20 14L13.5 20M20 14H15.5C14.3954 14 13.5 14.8954 13.5 16V20M13.5 20H7C5.34315 20 4 18.6569 4 17V12"
-										// stroke="#fff"
 										strokeWidth="2"
 										strokeLinecap="round"
 										strokeLinejoin="round"
 									/>
 									<path
 										d="M4 4L6.5 6.5M9 9L6.5 6.5M6.5 6.5L9 4M6.5 6.5L4 9"
-										// stroke="#fff"
 										strokeWidth="2"
 										strokeLinecap="round"
 										strokeLinejoin="round"

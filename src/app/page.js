@@ -23,7 +23,6 @@ export default function Home() {
 	// Update local storage when fileNames change
 	useEffect(() => {
 		localStorage.setItem("files", JSON.stringify(fileNames));
-		console.log(fileNames);
 	}, [fileNames]);
 
 	const FooterDescp = useMemo(() => {

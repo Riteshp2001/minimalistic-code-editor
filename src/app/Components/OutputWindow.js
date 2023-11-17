@@ -8,7 +8,6 @@ export default function OutputWindow() {
 
 	useEffect(() => {
 		const iframe = iframeRef.current;
-		console.log(iframe.contentDocument);
 		const iframeDocument = iframe.contentDocument;
 		if (!iframeDocument) {
 			console.error("iframe document is not available.");
