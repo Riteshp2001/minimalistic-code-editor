@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { FileContext } from "./CommonWindow";
-import { Tooltip,Typography } from "@material-tailwind/react";
+import Tooltip from "./Tooltip";
 
 export default function AddFile({ fileNames, setFileNames }) {
 	const [fileName, setFileName] = useState("");
@@ -100,20 +100,9 @@ export default function AddFile({ fileNames, setFileNames }) {
 				</div>
 				<span className="absolute inset-y-0 right-0 flex items-center">
 					<Tooltip
-						animate={{
-							mount: { scale: 1, y: 0 },
-							unmount: { scale: 0, y: 25 },
-						}}
-						content={
-							<div className="w-80">
-								<Typography color="white" className="font-medium">
-									Adding Files
-								</Typography>
-								<Typography variant="small" color="white" className="font-normal opacity-80">
-									Add as many files as you want no limit, files with witespaces will be replaced by &apos;_&apos;.
-								</Typography>
-							</div>
-						}
+						content="
+									Add as many files as you want no limit, files with witespaces will be replaced by '_'.
+							"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

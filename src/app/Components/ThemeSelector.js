@@ -3,7 +3,7 @@ import monacoThemes, { defineTheme } from "./MonacoThemes";
 import { FileContext } from "./CommonWindow";
 import JSZip from "jszip";
 import AddFile from "./AddFile";
-import { Tooltip } from "@material-tailwind/react";
+import Tooltip from "./Tooltip";
 
 const ThemeSelector = ({ fileNames, setFileNames }) => {
 	const { html, css, js, theme, setTheme } = useContext(FileContext);
@@ -25,13 +25,7 @@ const ThemeSelector = ({ fileNames, setFileNames }) => {
 		};
 
 		return (
-			<Tooltip
-				content="Export as ZIP"
-				animate={{
-					mount: { scale: 1, y: 0 },
-					unmount: { scale: 0, y: 25 },
-				}}
-			>
+			<Tooltip content="Export as ZIP">
 				<button
 					name="exportFile"
 					onClick={handleExport}

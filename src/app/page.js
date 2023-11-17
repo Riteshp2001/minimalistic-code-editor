@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import CommonWindow from "./Components/CommonWindow";
 import { useEffect, useState } from "react";
-import { Tooltip } from "@material-tailwind/react";
+import Tooltip from "./Components/Tooltip";
 
 export default function Home() {
 	const [fileNames, setFileNames] = useState([]);
@@ -89,14 +89,7 @@ function Footer() {
 		<footer>
 			<p className="text-center text-gray-500 pb-2">
 				Build with <span className="text-pink-500">&hearts;</span> by{" "}
-				<Tooltip
-					animate={{
-						mount: { scale: 1, y: 0 },
-						unmount: { scale: 0, y: 25 },
-					}}
-					content="My Website i am proud of 😤."
-					className="p-2"
-				>
+				<Tooltip content="My Portfolio i am proud of 😤.">
 					<a
 						href="https://riteshpandit.vercel.app/"
 						target="_blank"
