@@ -99,11 +99,7 @@ export default function AddFile({ fileNames, setFileNames }) {
 					</label>
 				</div>
 				<span className="absolute inset-y-0 right-0 flex items-center">
-					<Tooltip
-						content="
-									Add as many files as you want no limit, files with witespaces will be replaced by '_'.
-							"
-					>
+					<Tooltip content="Add as many files as you want no limit, files with witespaces will be replaced by '_'.">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"

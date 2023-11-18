@@ -3,6 +3,7 @@ import { defineTheme, html as monacoHtml, css as monacoCss, js as monacoJs } fro
 import ThemeSelector from "./ThemeSelector";
 import _ from "lodash";
 import SplittingWindow from "./SplittingWindow";
+import Tooltip from "./Tooltip";
 
 export const FileContext = createContext(null);
 
@@ -71,8 +72,8 @@ function FilesViewer({ fileNames, setFileNames }) {
 	}
 
 	return (
-		<div className="relative  overflow-x-auto w-[95%] mx-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-white mb-4">
-			<div className="flex p-3 mb-3 flex-row-reverse justify-end">
+		<div className="relative w-[90%] mx-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-white mb-4">
+			<div className="flex p-10 mb-3 flex-row-reverse justify-end">
 				{fileNames.map((file) => (
 					<span
 						key={file.id}
@@ -82,44 +83,56 @@ function FilesViewer({ fileNames, setFileNames }) {
 								: `hover:scale-105 hover:border-blue-300 hover:bg-blue-700`
 						}  `}
 					>
-						<span
-							onClick={() => setSelectedFile(file.id)}
-							className="cursor-pointer transition-all duration-500 stroke-white text-center w-full inline-block hover:underline hover:underline-offset-4 hover:text-black "
+						<Tooltip
+							content={
+								<div className="flex flex-col items-center">
+									<span className="font-bold text-sm">📄created</span>
+									<span className="text-xs">{file.created}</span>
+								</div>
+							}
+							top={"top-[-55px]"}
 						>
-							{file.name}
-						</span>
-						<span className="px-2">|</span>
-						<span onClick={() => deleteSelectedFile(file.id)} clas>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24px"
-								height="24px"
-								viewBox="0 0 24 24"
-								className="inline cursor-pointer transition-all duration-500 hover:scale-110 z-10 stroke-white hover:stroke-black "
-								fill="none"
+							<span
+								onClick={() => setSelectedFile(file.id)}
+								className="cursor-pointer transition-all duration-500 stroke-white text-center w-full inline-block hover:underline hover:underline-offset-4 hover:text-black "
 							>
+								{file.name}
+							</span>
+						</Tooltip>
+						<span className="px-2">|</span>
+						<span onClick={() => deleteSelectedFile(file.id)}>
+							<Tooltip content="Delete ❌">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="24px"
 									height="24px"
 									viewBox="0 0 24 24"
-									className="inline cursor-pointer"
+									className="inline cursor-pointer transition-all duration-500 hover:scale-110 z-10 stroke-white hover:stroke-black "
 									fill="none"
 								>
-									<path
-										d="M20 14V7C20 5.34315 18.6569 4 17 4H12M20 14L13.5 20M20 14H15.5C14.3954 14 13.5 14.8954 13.5 16V20M13.5 20H7C5.34315 20 4 18.6569 4 17V12"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-									<path
-										d="M4 4L6.5 6.5M9 9L6.5 6.5M6.5 6.5L9 4M6.5 6.5L4 9"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24px"
+										height="24px"
+										viewBox="0 0 24 24"
+										className="inline cursor-pointer"
+										fill="none"
+									>
+										<path
+											d="M20 14V7C20 5.34315 18.6569 4 17 4H12M20 14L13.5 20M20 14H15.5C14.3954 14 13.5 14.8954 13.5 16V20M13.5 20H7C5.34315 20 4 18.6569 4 17V12"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										/>
+										<path
+											d="M4 4L6.5 6.5M9 9L6.5 6.5M6.5 6.5L9 4M6.5 6.5L4 9"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										/>
+									</svg>
 								</svg>
-							</svg>
+							</Tooltip>
 						</span>
 					</span>
 				))}
