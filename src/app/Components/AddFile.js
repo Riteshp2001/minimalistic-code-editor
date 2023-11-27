@@ -48,8 +48,6 @@ export default function AddFile({ fileNames, setFileNames }) {
 		if (previouslySelected) {
 			previouslySelected.isSelected = false;
 		}
-		console.log(fileNames.length);
-
 		setFileNames((prevFiles) => {
 			const newFilesArray = [...prevFiles, newFile];
 			return newFilesArray;
