@@ -14,7 +14,8 @@ const ThemeSelector = ({ fileNames, setFileNames, currentFile }) => {
 			const zip = new JSZip();
 
 			// Get the current date and time
-			const now = new Date().toLocaleString();
+			const date = new Date();
+			const now = date.toLocaleString();
 
 			const metadata = ` Exported on: ${now} `;
 
@@ -29,7 +30,7 @@ const ThemeSelector = ({ fileNames, setFileNames, currentFile }) => {
 			const readmeContent =
 				"# 🎉🌟 Welcome Fellow Coder! 🌟🎉\n\n" +
 				"First of all thank you for using my Minimalistic Frontend Code Editor and exporting this website file. These files were exported on " +
-				now +
+				date.toDateString() +
 				".<br> Added date display just for showing off my skills😛 (But wait is that even a skill 😶‍🌫️, zzzz...).\n\n" +
 				"Feel the vibe of my creativity!😈\n\n" +
 				"### 🚀 Quick Links:\n\n" +
