@@ -16,40 +16,35 @@ const ThemeSelector = ({ fileNames, setFileNames, currentFile }) => {
 			// Get the current date and time
 			const now = new Date().toLocaleString();
 
-			const metadata = `<!-- Exported on: ${now} -->\n`;
+			const metadata = ` Exported on: ${now} `;
 
 			zip.file(
 				"index.html",
-				`${metadata}\n\n<!-- Link to my website: https://riteshpandit.vercel.app -->\n\n${html}`
+				`<!--${metadata}-->\n\n<!-- Link to my website: https://riteshpandit.vercel.app -->\n\n${html}`
 			);
-			zip.file("styles.css", `${metadata}\n\n/* Styles for the magic */\n\n${css}`);
-			zip.file("script.js", `${metadata}\n\n// JavaScript wizardry begins\n\n${js}`);
+			zip.file("styles.css", `/*${metadata}*/\n\n/* Styles for the magic */\n\n${css}`);
+			zip.file("script.js", `//${metadata}\n\n// JavaScript wizardry begins\n\n${js}`);
 
 			// README content
-			const readmeContent = `
-# 🎉🌟 Welcome Fellow Coder! 🌟🎉
-
-First of all thank you for using my Minimalistic Frontend Code Editor and exporting this website file. These files were exported on 27/11/2023, 20:25:25.<br> Added date display just for showing off my skills😛 (But wait is that even a skill 😶‍🌫️, zzzz...).
-
-Feel the vibe of my creativity!😈
-
-### 🚀 Quick Links:
-
--   [index.html](index.html): Check out your exported fancy website!
--   [styles.css](styles.css): The style behind your magic.
--   [script.js](script.js): Behold, your JavaScript wizardry!(Lemme tell you secret I know it's empty but you can add your own magic here 😎)
-
-### ✨ Want to know more? 🌈🦄
-
-Dive into my world at **_[riteshpandit.vercel.app](https://riteshpandit.vercel.app)_** for an immersive experience. Also you can connect with me on **_[LinkedIn](https://www.linkedin.com/in/ritesh-pandit-2001/)_** <br> wanna fork this **[repo](https://github.com/Riteshp2001/minimalistic-code-editor)**? Go ahead! I would love to see your creativity sorry in advance for any inconvineance sadly my code would be cluttered *(Beginner Mistakes )*😔.
-
--   Keep Rocking! 🚀🎸
-
-### ``Just a reminder:``
-
-> _Remember, even code needs 'breaks'—just not the infinite loop kind! Take timeouts, relish snacks, and debug life with a **smile** 😊_!
-
-  `;
+			const readmeContent =
+				"# 🎉🌟 Welcome Fellow Coder! 🌟🎉\n\n" +
+				"First of all thank you for using my Minimalistic Frontend Code Editor and exporting this website file. These files were exported on " +
+				now +
+				".<br> Added date display just for showing off my skills😛 (But wait is that even a skill 😶‍🌫️, zzzz...).\n\n" +
+				"Feel the vibe of my creativity!😈\n\n" +
+				"### 🚀 Quick Links:\n\n" +
+				"-   [index.html](index.html): Check out your exported fancy website!\n" +
+				"-   [styles.css](styles.css): The style behind your magic.\n" +
+				"-   [script.js](script.js): Behold, your JavaScript wizardry!" +
+				(js.trim().length > 0
+					? " (Lemme tell you secret!! I know it's empty but you can add your own magic here 😎)"
+					: "") +
+				"\n\n" +
+				"### ✨ Want to know more? 🌈🦄\n\n" +
+				"Dive into my world at **_[riteshpandit.vercel.app](https://riteshpandit.vercel.app)_** for an immersive experience. Also you can connect with me on **_[LinkedIn](https://www.linkedin.com/in/ritesh-pandit-2001/)_** <br> wanna fork this **[repo](https://github.com/Riteshp2001/minimalistic-code-editor)**? Go ahead! I would love to see your creativity sorry in advance for any inconvenience sadly my code would be cluttered *(Beginner Mistakes )*😔.\n\n" +
+				"-   Keep Rocking! 🚀🎸\n\n" +
+				"### ``Just a reminder:``\n\n" +
+				"> _Remember, even code needs 'breaks'—just not the infinite loop kind! Take timeouts, relish snacks, and debug life with a **smile** 😊_!";
 
 			zip.file("README.md", readmeContent);
 
@@ -77,7 +72,7 @@ Dive into my world at **_[riteshpandit.vercel.app](https://riteshpandit.vercel.a
 				</button>
 			</Tooltip>
 		);
-	}, [html, css, js]);
+	}, [html, css, js, currentFile]);
 
 	const selectTheme = useMemo(() => {
 		const handleThemeChange = (themeName) => {
