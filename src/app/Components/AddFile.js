@@ -55,7 +55,6 @@ export default function AddFile({ fileNames, setFileNames }) {
 			return newFilesArray;
 		});
 
-		console.log(fileNames.length,fileNames);
 		if (!checkFilesOnce && fileNames.length == 0) {
 			addNotification(
 				"Important Message",
