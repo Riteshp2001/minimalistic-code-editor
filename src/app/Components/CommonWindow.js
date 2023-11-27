@@ -1,9 +1,10 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
 import { defineTheme, html as monacoHtml, css as monacoCss, js as monacoJs } from "./MonacoThemes";
 import ThemeSelector from "./ThemeSelector";
-import _ from "lodash";
 import SplittingWindow from "./SplittingWindow";
-import Tooltip from "./Tooltip";
+import addNotification from "./Notifications";
+import ContentEditable from "react-contenteditable";
+import _ from "lodash";
 
 export const FileContext = createContext(null);
 
@@ -36,12 +37,15 @@ export default function CommonWindow({ fileNames, setFileNames }) {
 		window.localStorage.setItem("js", js);
 	}, [html, css, js]);
 
+	//get the current file
+	const currentFile = fileNames.find((file) => file.isSelected);
+
 	return (
 		<div className="p-2 rounded-lg shadow-lg w-full">
 			<FileContext.Provider value={{ html, css, js, theme, setHtml, setCss, setJs, setTheme }}>
 				<FilesViewer fileNames={fileNames} setFileNames={setFileNames} />
-				<ThemeSelector fileNames={fileNames} setFileNames={setFileNames} />
-				<SplittingWindow fileNames={fileNames}/>
+				<ThemeSelector fileNames={fileNames} setFileNames={setFileNames} currentFile={currentFile} />
+				<SplittingWindow fileNames={fileNames} />
 			</FileContext.Provider>
 		</div>
 	);
@@ -49,6 +53,9 @@ export default function CommonWindow({ fileNames, setFileNames }) {
 
 function FilesViewer({ fileNames, setFileNames }) {
 	const { setHtml, setCss, setJs } = useContext(FileContext);
+	const [currentFile, setCurrentFile] = useState(null);
+	const [currentFileCss, setCurrentFileCss] = useState(false);
+	const [isDoubleClicked, setIsDoubleClicked] = useState(false);
 
 	function setSelectedFile(fileId) {
 		const selectedFile = fileNames.find((file) => file.id === fileId);
@@ -63,13 +70,69 @@ function FilesViewer({ fileNames, setFileNames }) {
 			setHtml(selectedFile.content.html);
 			setCss(selectedFile.content.css);
 			setJs(selectedFile.content.js);
+			setCurrentFile(selectedFile.name);
 		}
 	}
 
 	function deleteSelectedFile(fileId) {
+		const fileName = fileNames.find((file) => file.id === fileId).name;
 		const newFileNames = fileNames.filter((file) => file.id !== fileId);
 		setFileNames(newFileNames);
+		addNotification(`${fileName}`, `File deleted successfully!`, "danger");
 	}
+
+	const handleDoubleClick = (fileId) => {
+		setSelectedFile(fileId);
+		setIsDoubleClicked(true);
+		setCurrentFileCss(true);
+	};
+
+	const handleBlur = (fileId, newName) => {
+		const currentFormattedFileName = sanitizeFileName(newName);
+		const oldName = fileNames.find((file) => file.id === fileId).name;
+
+		// Check if the sanitized file name already exists
+		const isFileExists = fileNames.some((file) => file.name === currentFormattedFileName);
+
+		if (isFileExists && isDoubleClicked && newName !== oldName) {
+			addNotification(`${newName}`, `Filename Already Exists :/`, "info");
+			renameSelectedFile(fileId, oldName, oldName);
+			setCurrentFileCss(false);
+			setIsDoubleClicked(false);
+			return;
+		} else {
+			renameSelectedFile(fileId, currentFormattedFileName, oldName);
+			setCurrentFileCss(false);
+			setIsDoubleClicked(false);
+		}
+	};
+
+	// Function to sanitize the file name
+	const sanitizeFileName = (name) => {
+		const trimmedName = name.trim();
+		const sanitizedName = trimmedName.replace(/\s+/g, "_"); // Replaces spaces with underscores
+		return sanitizedName === "" ? "Daisy_Date" : sanitizedName;
+	};
+
+	const renameSelectedFile = (fileId, newName, oldName) => {
+		if (newName.length == 0) {
+			addNotification(`ERROR !`, `Filename cannot be empty!`, "danger");
+			return;
+		}
+		const newFileNames = fileNames.map((file) => {
+			if (file.id === fileId) {
+				return {
+					...file,
+					name: newName,
+				};
+			} else {
+				return file;
+			}
+		});
+		setFileNames(newFileNames);
+		if (newName !== oldName && newName !== "")
+			addNotification(`${oldName} -> ${newName}`, `File Renamed Successfully !`, "success");
+	};
 
 	return (
 		<div className="relative w-[90%] mx-auto overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-white mb-4">
@@ -83,12 +146,27 @@ function FilesViewer({ fileNames, setFileNames }) {
 								: `hover:scale-105 hover:border-blue-300 hover:bg-blue-700`
 						}  `}
 					>
-						<span
-							onClick={() => setSelectedFile(file.id)}
-							className="cursor-pointer transition-all duration-500 stroke-white text-center w-full inline-block hover:underline hover:underline-offset-4 hover:text-black "
-						>
-							{file.name}
-						</span>
+						{currentFile == file.name ? (
+							<ContentEditable
+								onClick={() => setSelectedFile(file.id)}
+								onDoubleClick={() => handleDoubleClick(file.id)}
+								onBlur={(e) => handleBlur(file.id, e.target.innerText)}
+								html={file.name}
+								className={`${file.isSelected ? "w-full" : "w-12 fade-left-to-right"} ${
+									currentFileCss ? "rounded-lg  bg-blue-800 underline" : ""
+								} cursor-pointer outline-none transition-all duration-500 stroke-white text-center overflow-x-hidden inline-block hover:underline-offset-4 hover:text-black `}
+							/>
+						) : (
+							<ContentEditable
+								onClick={() => setSelectedFile(file.id)}
+								onDoubleClick={() => handleDoubleClick(file.id)}
+								onBlur={(e) => handleBlur(file.id, e.target.innerText)}
+								html={file.name}
+								className={`${
+									file.isSelected ? "w-full" : "w-12 fade-left-to-right"
+								}cursor-pointer outline-none transition-all duration-500 stroke-white text-center overflow-x-hidden inline-block hover:underline-offset-4 hover:text-black `}
+							/>
+						)}
 						<span className="px-2">|</span>
 						<span onClick={() => deleteSelectedFile(file.id)}>
 							<svg

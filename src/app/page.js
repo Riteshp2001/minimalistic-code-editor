@@ -3,7 +3,8 @@ import { useMemo } from "react";
 import CommonWindow from "./Components/CommonWindow";
 import { useEffect, useState } from "react";
 import Tooltip from "./Components/Tooltip";
-
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 export default function Home() {
 	const [fileNames, setFileNames] = useState([]);
 
@@ -22,6 +23,7 @@ export default function Home() {
 
 	// Update local storage when fileNames change
 	useEffect(() => {
+		console.log("Saving files to localStorage:", fileNames);
 		localStorage.setItem("files", JSON.stringify(fileNames));
 	}, [fileNames]);
 
@@ -35,6 +37,7 @@ export default function Home() {
 
 	return (
 		<main>
+			<ReactNotifications />
 			{HeaderDescp}
 			<div className="hidden lg:block lg:justify-center lg:items-center">
 				<CommonWindow fileNames={fileNames} setFileNames={setFileNames} />
@@ -74,7 +77,7 @@ function Head() {
 					></path>
 				</svg>
 			</a>
-			
+
 			<h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center mb-6 text-blue-700 p-5">
 				Minimalistic Front-End Editor
 			</h1>

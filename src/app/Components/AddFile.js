@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { FileContext } from "./CommonWindow";
 import Tooltip from "./Tooltip";
+import addNotification from "./Notifications";
+
+let checkFilesOnce = false;
 
 export default function AddFile({ fileNames, setFileNames }) {
 	const [fileName, setFileName] = useState("");
 	const { html, css, js } = useContext(FileContext);
-	const [selectedFileId, setSelectedFileId] = useState(null);
 
 	function handleFileNameChange(e) {
 		setFileName(e.target.value);
@@ -46,36 +48,27 @@ export default function AddFile({ fileNames, setFileNames }) {
 		if (previouslySelected) {
 			previouslySelected.isSelected = false;
 		}
+		console.log(fileNames.length);
 
-		setFileNames([...fileNames, newFile]);
+		setFileNames((prevFiles) => {
+			const newFilesArray = [...prevFiles, newFile];
+			return newFilesArray;
+		});
+
+		console.log(fileNames.length,fileNames);
+		if (!checkFilesOnce && fileNames.length == 0) {
+			addNotification(
+				"Important Message",
+				`Congratulations on adding your first file 🎉, Now when you have added file you can double click on the file to edit it's name as mnay times as you want ! \n Happy Coding ! ;)`,
+				"info",
+				10000
+			);
+			checkFilesOnce = true;
+		}
 		setFileName(sanitizeFileName);
+		addNotification(`${sanitizedFileName}`, `File added successfully!`);
 	};
 
-	// Automatically update the selected file every 3 minutes
-	useEffect(() => {
-		if (selectedFileId) {
-			const interval = setInterval(() => {
-				setFileNames((prevFiles) =>
-					prevFiles.map((file) =>
-						file.id === selectedFileId
-							? {
-									...file,
-									content: {
-										html: html,
-										css: css,
-										js: js,
-									},
-							  }
-							: file
-					)
-				);
-			}, 180000);
-
-			return () => {
-				clearInterval(interval);
-			};
-		}
-	}, [html, css, js, selectedFileId, setFileNames]);
 	return (
 		<div>
 			<form onSubmit={addFile} className=" relative flex ">

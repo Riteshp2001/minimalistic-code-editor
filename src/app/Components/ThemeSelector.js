@@ -4,24 +4,65 @@ import { FileContext } from "./CommonWindow";
 import JSZip from "jszip";
 import AddFile from "./AddFile";
 import Tooltip from "./Tooltip";
+import addNotification from "./Notifications";
 
-const ThemeSelector = ({ fileNames, setFileNames }) => {
+const ThemeSelector = ({ fileNames, setFileNames, currentFile }) => {
 	const { html, css, js, theme, setTheme } = useContext(FileContext);
 
 	const handleExportButton = useMemo(() => {
 		const handleExport = () => {
 			const zip = new JSZip();
 
-			zip.file("index.html", html);
-			zip.file("styles.css", css);
-			zip.file("script.js", js);
+			// Get the current date and time
+			const now = new Date().toLocaleString();
+
+			const metadata = `<!-- Exported on: ${now} -->\n`;
+
+			zip.file(
+				"index.html",
+				`${metadata}\n\n<!-- Link to my website: https://riteshpandit.vercel.app -->\n\n${html}`
+			);
+			zip.file("styles.css", `${metadata}\n\n/* Styles for the magic */\n\n${css}`);
+			zip.file("script.js", `${metadata}\n\n// JavaScript wizardry begins\n\n${js}`);
+
+			// README content
+			const readmeContent = `
+# 🎉🌟 Welcome Fellow Coder! 🌟🎉
+
+First of all thank you for using my Minimalistic Frontend Code Editor and exporting this website file. These files were exported on 27/11/2023, 20:25:25.<br> Added date display just for showing off my skills😛 (But wait is that even a skill 😶‍🌫️, zzzz...).
+
+Feel the vibe of my creativity!😈
+
+### 🚀 Quick Links:
+
+-   [index.html](index.html): Check out your exported fancy website!
+-   [styles.css](styles.css): The style behind your magic.
+-   [script.js](script.js): Behold, your JavaScript wizardry!(Lemme tell you secret I know it's empty but you can add your own magic here 😎)
+
+### ✨ Want to know more? 🌈🦄
+
+Dive into my world at **_[riteshpandit.vercel.app](https://riteshpandit.vercel.app)_** for an immersive experience. Also you can connect with me on **_[LinkedIn](https://www.linkedin.com/in/ritesh-pandit-2001/)_** <br> wanna fork this **[repo](https://github.com/Riteshp2001/minimalistic-code-editor)**? Go ahead! I would love to see your creativity sorry in advance for any inconvineance sadly my code would be cluttered *(Beginner Mistakes )*😔.
+
+-   Keep Rocking! 🚀🎸
+
+### ``Just a reminder:``
+
+> _Remember, even code needs 'breaks'—just not the infinite loop kind! Take timeouts, relish snacks, and debug life with a **smile** 😊_!
+
+  `;
+
+			zip.file("README.md", readmeContent);
 
 			zip.generateAsync({ type: "blob" }).then(function (blob) {
 				const a = document.createElement("a");
 				a.href = URL.createObjectURL(blob);
-				a.download = "minimilistic_code.zip";
+				a.download = `${
+					currentFile ? currentFile.name + "_" + currentFile.id : "minimilistic_code_" + crypto.randomUUID()
+				}`;
+				(".zip");
 				a.click();
 			});
+			addNotification("Exported as ZIP", "Check downloads folder", "success");
 		};
 
 		return (
@@ -55,7 +96,7 @@ const ThemeSelector = ({ fileNames, setFileNames }) => {
 				value={theme}
 				onChange={(e) => handleThemeChange(e.target.value)}
 				placeholder={`Select Theme`}
-				className="bg-gray-50 border border-gray-300 font-semibold text-gray-900 text-sm rounded-lg focus:ring-blue-500 outline-none focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+				className="bg-gray-50 border-b-2 border-blue-300 font-semibold text-gray-900 text-sm rounded-lg focus:ring-blue-500 outline-none focus:border-blue-500 block px-2 mx-2 dark:bg-[#2f2f2f] dark:h-10 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 			>
 				<optgroup label="Themes">
 					{Object.keys(monacoThemes).map((themeName, index) => (
