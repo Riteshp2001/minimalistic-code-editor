@@ -5,8 +5,22 @@ import { useEffect, useState } from "react";
 import Tooltip from "./Components/Tooltip";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import addNotification from "./Components/Notifications";
 export default function Home() {
 	const [fileNames, setFileNames] = useState([]);
+
+	// Function to calculate the size of the localStorage in MB
+	function calculateTotalLocalStorageSize() {
+		let totalSize = 0;
+
+		for (let i = 0; i < localStorage.length; i++) {
+			const key = localStorage.key(i);
+			const value = localStorage.getItem(key);
+			totalSize += (key.length + value.length) * 2; // Unicode data is double byte
+		}
+
+		return (totalSize / (1024 * 1024)).toFixed(2); // Size in MB with two decimal places
+	}
 
 	// Load saved files from localStorage on initial render
 	useEffect(() => {
@@ -23,8 +37,20 @@ export default function Home() {
 
 	// Update local storage when fileNames change
 	useEffect(() => {
-		console.log("Saving files to localStorage:", fileNames);
-		localStorage.setItem("files", JSON.stringify(fileNames));
+		const localStorageSize = calculateTotalLocalStorageSize();
+		const currentDataSize = JSON.stringify(fileNames).length / (1024 * 1024); // Convert bytes to MB
+
+		if (parseFloat(localStorageSize) + currentDataSize <= 5) {
+			console.log("Saving files to localStorage:", fileNames);
+			localStorage.setItem("files", JSON.stringify(fileNames));
+		} else {
+			addNotification(
+				"Imprortant Message",
+				"LocalStorage size exceeds 5MB. Cannot save , Sorry for inconvineance. you can try deleting some files.",
+				"warning"
+			);
+			console.log("LocalStorage size exceeds 5MB. Cannot save.");
+		}
 	}, [fileNames]);
 
 	const FooterDescp = useMemo(() => {
