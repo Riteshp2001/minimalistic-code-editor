@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { FileContext } from "./CommonWindow";
 import Tooltip from "./Tooltip";
 import addNotification from "./Notifications";
-import { add } from "lodash";
 
 let checkFilesOnce = false;
 
@@ -16,7 +15,7 @@ export default function AddFile({ fileNames, setFileNames }) {
 
 	// Function to sanitize the file name
 	const sanitizeFileName = (name) => {
-		if (name == undefined) return;
+		if (name.length == 0 && name == undefined) return;
 		const trimmedName = name.trim();
 		const sanitizedName = trimmedName.replace(/\s+/g, "_"); // Replaces spaces with underscores
 		return sanitizedName === "" ? "Daisy_Date" : sanitizedName;
@@ -40,9 +39,9 @@ export default function AddFile({ fileNames, setFileNames }) {
 			name: sanitizedFileName,
 			created: new Date().toDateString(),
 			content: {
-				html: html,
-				css: css,
-				js: js,
+				html,
+				css,
+				js,
 			},
 			isSelected: true,
 		};

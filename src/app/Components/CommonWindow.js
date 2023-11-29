@@ -45,7 +45,7 @@ export default function CommonWindow({ fileNames, setFileNames }) {
 			<FileContext.Provider value={{ html, css, js, theme, setHtml, setCss, setJs, setTheme }}>
 				<FilesViewer fileNames={fileNames} setFileNames={setFileNames} />
 				<ThemeSelector fileNames={fileNames} setFileNames={setFileNames} currentFile={currentFile} />
-				<SplittingWindow fileNames={fileNames} />
+				<SplittingWindow fileNames={fileNames} setFileNames={setFileNames} />
 			</FileContext.Provider>
 		</div>
 	);
@@ -61,10 +61,10 @@ function FilesViewer({ fileNames, setFileNames }) {
 				...file,
 				isSelected: file.id === fileId ? true : false,
 			}));
-			setFileNames(updatedFiles);
 			setHtml(selectedFile.content.html);
 			setCss(selectedFile.content.css);
 			setJs(selectedFile.content.js);
+			setFileNames(updatedFiles);
 		}
 	}
 
@@ -72,7 +72,6 @@ function FilesViewer({ fileNames, setFileNames }) {
 		const newFileNames = fileNames.filter((file) => file.id !== fileId);
 		setFileNames(newFileNames);
 	}
-	const currentFile = fileNames.find((file) => file.isSelected);
 
 	return (
 		<div className="relative w-[90%] mx-auto overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-white mb-4">

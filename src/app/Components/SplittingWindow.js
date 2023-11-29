@@ -3,7 +3,7 @@ import TypingEditorWindow from "./TypingEditorWindow";
 import OutputWindow from "./OutputWindow";
 import { MAX_GUTTER_SIZE } from "./MonacoThemes";
 
-export default function SplittingWindow({ fileNames }) {
+export default function SplittingWindow({ fileNames, setFileNames }) {
 	const selectedFile = fileNames.find((file) => file.isSelected);
 
 	return (
@@ -14,7 +14,11 @@ export default function SplittingWindow({ fileNames }) {
 					<div className="h-3 w-3 bg-yellow-500 rounded-full mr-2"></div>
 					<div className="h-3 w-3 bg-green-500 rounded-full mr-2"></div>
 				</div>
-				{selectedFile && <div className="relative text-[0.6rem] inline-block text-center text-white">Date Created: {selectedFile.created}</div>}
+				{selectedFile && (
+					<div className="relative text-[0.6rem] inline-block text-center text-white">
+						Date Created: {selectedFile.created}
+					</div>
+				)}
 			</div>
 
 			<Split
@@ -25,7 +29,7 @@ export default function SplittingWindow({ fileNames }) {
 				direction="horizontal"
 				className="flex flex-row flex-nowrap transition-height duration-250 "
 			>
-				<TypingEditorWindow />
+				<TypingEditorWindow setFileNames={setFileNames} fileNames={fileNames} />
 				<OutputWindow />
 			</Split>
 		</>
