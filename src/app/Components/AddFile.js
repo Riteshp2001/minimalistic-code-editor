@@ -54,7 +54,7 @@ export default function AddFile({ fileNames, setFileNames }) {
 		if (!checkFilesOnce && fileNames.length == 0) {
 			addNotification(
 				"Important Message",
-				`Congratulations on adding your first file 🎉, Now when you have added file you can double click on the file to edit it's name as mnay times as you want ! \n Happy Coding ! ;)`,
+				`Congratulations on adding your first file 🎉, Now when you have added file you can double click on the file to edit it's name as many times as you want ! \n Happy Coding ! ;)`,
 				"info",
 				10000
 			);
