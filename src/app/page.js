@@ -41,7 +41,6 @@ export default function Home() {
 		const currentDataSize = JSON.stringify(fileNames).length / (1024 * 1024); // Convert bytes to MB
 
 		if (parseFloat(localStorageSize) + currentDataSize <= 5) {
-			console.log("Saving files to localStorage:", fileNames);
 			localStorage.setItem("files", JSON.stringify(fileNames));
 		} else {
 			addNotification(
